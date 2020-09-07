@@ -24,24 +24,17 @@ set noshowmode
 
 call plug#begin('~/.vim/plugged')
 
-" AirLine
+" AirLine => Footer
 Plug 'vim-airline/vim-airline'
 
+" C#
+Plug 'OmniSharp/omnisharp-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Plug 'scrooloose/nerdtree'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
 " Desinstalar estas dependencias en terminal, para que funcione vim-devicons
 " brew tap homebrew/cask-fonts
 " brew cask install font-hack-nerd-font
-
-Plug 'airblade/vim-gitgutter'
-Plug 'ctrlpvim/ctrlp.vim' " fuzzy find files
-Plug 'scrooloose/nerdcommenter'
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
-" Plug 'prettier/vim-prettier', { 'do': 'yarn install', branch: 'release/1.x' }
-
-Plug 'christoomey/vim-tmux-navigator'
-
-Plug 'HerringtonDarkholme/yats.vim' " TS Syntax
 
 " Flutter
 Plug 'dart-lang/dart-vim-plugin'
@@ -50,19 +43,86 @@ Plug 'thosakwe/vim-flutter'
 " Git DashBoard
 Plug 'junegunn/vim-github-dashboard'
 
-" Themes
-Plug 'danilo-augusto/vim-afterglow'
-
 " IDE
 Plug 'easymotion/vim-easymotion'
 Plug 'scrooloose/nerdtree'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'scrooloose/nerdcommenter'
+Plug 'airblade/vim-gitgutter'
+Plug 'HerringtonDarkholme/yats.vim' " TS Syntax
+
+" Config ParamagicDev in GitHub
+" https://github.com/prettier/vim-prettier/issues/214
+
+" ColorSchema
+Plug 'flazz/vim-colorschemes'
+Plug 'dracula/vim'
+Plug 'drewtempelmeyer/palenight.vim'
+Plug 'morhetz/gruvbox'
+
+" Tpope plugins
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-ragtag'
+
+" Javascript / React
+Plug 'pangloss/vim-javascript'
+Plug 'elzr/vim-json'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'jxnblk/vim-mdx-js'
+
+" html / csss
+Plug 'mattn/emmet-vim'
+Plug 'ap/vim-css-color'
+Plug 'prettier/vim-prettier', {
+      \ 'do': 'yarn install',
+      \ 'branch': 'release/0.x'
+      \}
+
+" Markdown previewing, ensure you have nodejs and yarn
+Plug 'iamcco/markdown-preview.vim', {'do': 'cd app & yarn install'}
+
+" Snippets
+Plug 'SirVer/ultisnips'
+
+" Linting
+Plug 'dense-analysis/ale'
+
+" Autocompletion
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" CoC recommended config
+let g:coc_start_at_startup = 1
+let g:coc_global_extensions = [
+      \ 'coc-json',
+      \ 'coc-css',
+      \ 'coc-ultisnips',
+      \ 'coc-tsserver',
+      \ 'coc-emmet',
+      \ 'coc-tag',
+      \ 'coc-omni',
+      \ 'coc-syntax',
+      \ 'coc-yaml',
+      \ 'coc-solargraph',
+      \ 'coc-phpls',
+      \ 'coc-html',
+      \ 'coc-tailwindcss',
+      \ 'coc-markdownlint',
+      \ 'coc-git'
+      \]
 
 call plug#end()
 
 let g:afterglow_italic_comments=1
 let g:afterglow_blackout=1
-colorscheme afterglow
+" colorscheme afterglow
+" colorscheme molokai
+" colorscheme dracula
+colorscheme gruvbox
+
+" Config AirLine => Footer
+let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#formatter = 'jsformatter'
 
 " Config Key
 let mapleader=" "
@@ -74,23 +134,23 @@ let g:NERDTreeGitStatusWithFlags = 1
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 let g:NERDTreeGitStatusNodeColorization = 1
 let g:NERDTreeColorMapCustom = {
-    \ "Staged"    : "#0ee375",  
-    \ "Modified"  : "#d9bf91",  
-    \ "Renamed"   : "#51C9FC",  
-    \ "Untracked" : "#FCE77C",  
-    \ "Unmerged"  : "#FC51E6",  
-    \ "Dirty"     : "#FFBD61",  
-    \ "Clean"     : "#87939A",   
-    \ "Ignored"   : "#808080"   
-    \ }
+     \ "Staged"    : "#0ee375",  
+     \ "Modified"  : "#d9bf91",  
+     \ "Renamed"   : "#51C9FC",  
+     \ "Untracked" : "#FCE77C",  
+     \ "Unmerged"  : "#FC51E6",  
+     \ "Dirty"     : "#FFBD61",  
+     \ "Clean"     : "#87939A",   
+     \ "Ignored"   : "#808080"   
+     \ }
 
 " Ignore Node Modules
 let g:NERDTreeIgnore = ['^node_modules$']
 
 " sync open file with NERDTree
-" " Check if NERDTree is open or active
+" Check if NERDTree is open or active
 function! IsNERDTreeOpen()        
-  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+ return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
 endfunction
 
 " Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
@@ -103,62 +163,26 @@ function! SyncTree()
 endfunction
 
 " Highlight currently open buffer in NERDTree
-" autocmd BufEnter * call SyncTree()
+autocmd BufEnter * call SyncTree()
 
 " vim-prettier
 let g:prettier#quickfix_enabled = 1
 let g:prettier#quickfix_auto_focus = 1
-let g:prettier#config#config_precedence = 'file-override'
 
 " prettier command for coc
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
-run prettier on save
+" command! -nargs=0 Prettier :CocCommand prettier.formatFile
+" run prettier on save
 let g:prettier#autoformat = 1
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+" autocmd BufWritePre, TextChanged, InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 
-" coc config
-let g:coc_global_extensions = [
-  \ 'coc-snippets',
-  \ 'coc-pairs',
-  \ 'coc-tsserver',
-  \ 'coc-eslint', 
-  \ 'coc-prettier', 
-  \ 'coc-json', 
-  \ ]
-
-" ctrlp
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+" Config C# Omnisharp-Vim
+let g:OmniSharp_selector_findusages = 'fzf'
 
 " always show signcolumns
 set signcolumn=yes
 
-" Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-"nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-"function! s:show_documentation()
-"  if (index(['vim','help'], &filetype) >= 0)
-"execute 'h '.expand('<cword>')
-"  else
-"    call CocAction('doHover')
-"  endif
-"endfunction
-
-" Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-nmap <Leader>z <Plug>(easymotion-s2)
+map <C-z> <Plug>(easymotion-s2)
+" nmap <Leader>z <Plug>(easymotion-s2)
 
 " Cambiando a Ctrl + n para NERDTree
 " nmap <Leader>as :NERDTreeFind<CR>
@@ -177,6 +201,10 @@ nmap <Leader>q :q<CR>
 " Salir sin guardar
 nmap <Leader>e :q!<CR>
 
+" Comando C#
+nmap <leader>rt :OmnisharpRunTest<cr>
+nmap <leader>rf :OmnisharpRunTestInFile<cr>
+
 " Comandos Flutter
 nnoremap <leader>fa :FlutterRun<cr>
 nnoremap <leader>fq :FlutterQuit<cr>
@@ -186,18 +214,18 @@ nnoremap <leader>fD :FlutterVisualDebug<cr>
 
 " Using CocList
 " Show all diagnostics
-nnoremap <leader>all  :<C-u>CocList diagnostics<cr>
+" nnoremap <leader>all  :<C-u>CocList diagnostics<cr>
 " Manage extensions
-nnoremap <silent> <space>ext  :<C-u>CocList extensions<cr>
+" nnoremap <silent> <space>ext  :<C-u>CocList extensions<cr>
 " Show commands
-nnoremap <silent> <space>com  :<C-u>CocList commands<cr>
+" nnoremap <silent> <space>com  :<C-u>CocList commands<cr>
 " Find symbol of current document
-nnoremap <silent> <space>osy  :<C-u>CocList outline<cr>
+" nnoremap <silent> <space>osy  :<C-u>CocList outline<cr>
 " Search workspace symbols
-nnoremap <silent> <space>sym  :<C-u>CocList -I symbols<cr>
+" nnoremap <silent> <space>sym  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
-nnoremap <silent> <space>jact  :<C-u>CocNext<CR>
+" nnoremap <silent> <space>jact  :<C-u>CocNext<CR>
 " Do default action for previous item.
-nnoremap <silent> <space>kactp  :<C-u>CocPrev<CR>
+" nnoremap <silent> <space>kactp  :<C-u>CocPrev<CR>
 " Resume latest coc list
-nnoremap <silent> <space>plat  :<C-u>CocListResume<CR>
+" nnoremap <silent> <space>plat  :<C-u>CocListResume<CR>
