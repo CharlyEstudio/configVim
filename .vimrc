@@ -27,11 +27,6 @@ call plug#begin('~/.vim/plugged')
 " AirLine => Footer
 Plug 'vim-airline/vim-airline'
 
-" C#
-Plug 'OmniSharp/omnisharp-vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-
 " Desinstalar estas dependencias en terminal, para que funcione vim-devicons
 " brew tap homebrew/cask-fonts
 " brew cask install font-hack-nerd-font
@@ -55,10 +50,38 @@ Plug 'HerringtonDarkholme/yats.vim' " TS Syntax
 " https://github.com/prettier/vim-prettier/issues/214
 
 " ColorSchema
-Plug 'flazz/vim-colorschemes'
-Plug 'dracula/vim'
-Plug 'drewtempelmeyer/palenight.vim'
+" Plug 'flazz/vim-colorschemes'
+" Plug 'dracula/vim'
+" Plug 'drewtempelmeyer/palenight.vim'
 Plug 'morhetz/gruvbox'
+
+" Identar tabs con lineas
+Plug 'Yggdroot/indentLine'
+let g:indentLine_color_term = 239
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+
+" Color Parentesís
+Plug 'kien/rainbow_parentheses.vim'
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['black',       'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
+let g:rbpt_max = 16
+let g:rbpt_loadcmd_toggle = 0
 
 " Tpope plugins
 Plug 'tpope/vim-fugitive'
@@ -91,6 +114,7 @@ Plug 'dense-analysis/ale'
 
 " Autocompletion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 " CoC recommended config
 let g:coc_start_at_startup = 1
 let g:coc_global_extensions = [
@@ -113,16 +137,11 @@ let g:coc_global_extensions = [
 
 call plug#end()
 
-let g:afterglow_italic_comments=1
-let g:afterglow_blackout=1
-" colorscheme afterglow
-" colorscheme molokai
-" colorscheme dracula
 colorscheme gruvbox
 
 " Config AirLine => Footer
 let g:airline#extensions#tabline#enabled = 1
-" let g:airline#extensions#tabline#formatter = 'jsformatter'
+let g:airline#extensions#tabline#formatter = 'jsformatter'
 
 " Config Key
 let mapleader=" "
@@ -163,20 +182,17 @@ function! SyncTree()
 endfunction
 
 " Highlight currently open buffer in NERDTree
-autocmd BufEnter * call SyncTree()
+" autocmd BufEnter * call SyncTree()
 
 " vim-prettier
 let g:prettier#quickfix_enabled = 1
 let g:prettier#quickfix_auto_focus = 1
 
 " prettier command for coc
-" command! -nargs=0 Prettier :CocCommand prettier.formatFile
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
 " run prettier on save
 let g:prettier#autoformat = 1
-" autocmd BufWritePre, TextChanged, InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
-
-" Config C# Omnisharp-Vim
-let g:OmniSharp_selector_findusages = 'fzf'
+autocmd BufWritePre, TextChanged, InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 
 " always show signcolumns
 set signcolumn=yes
@@ -211,6 +227,12 @@ nnoremap <leader>fq :FlutterQuit<cr>
 nnoremap <leader>fr :FlutterHotReload<cr>
 nnoremap <leader>fR :FlutterHotRestart<cr>
 nnoremap <leader>fD :FlutterVisualDebug<cr>
+
+" ColorsPairs
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
 
 " Using CocList
 " Show all diagnostics
