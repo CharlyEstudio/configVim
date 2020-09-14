@@ -1,4 +1,23 @@
+" HolaMundo
+set number
+set mouse=a
+set numberwidth=1
+set clipboard=unnamed
+" End HolaMundo
+
 syntax on
+
+" HolaMundo
+set showcmd
+set ruler
+set cursorline
+set encoding=utf-8
+set showmatch
+set sw=2
+set smarttab
+set cindent
+set laststatus=2
+" End HolaMundo
 
 set guicursor=
 set relativenumber
@@ -37,6 +56,72 @@ highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 call plug#begin('~/.vim/plugged')
 
+" Flutter
+Plug 'dart-lang/dart-vim-plugin'
+Plug 'thosakwe/vim-flutter'
+" End Flutter
+
+" Identar Columnas
+Plug 'Yggdroot/indentLine'
+let g:indentLine_color_term = 239
+"let g:indentLine_char_list = ['|', '?', '?', '?']
+
+" Color Parentesís
+Plug 'kien/rainbow_parentheses.vim'
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['black',       'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
+let g:rbpt_max = 16
+let g:rbpt_loadcmd_toggle = 0
+
+" HolaMundo Plug
+" Tpope plugins
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-ragtag'
+
+" Autocompletation CoC
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" CoC recommended config
+let g:coc_start_at_startup = 1
+let g:coc_global_extensions = [
+      \ 'coc-json',
+      \ 'coc-css',
+      \ 'coc-ultisnips',
+      \ 'coc-tsserver',
+      \ 'coc-emmet',
+      \ 'coc-tag',
+      \ 'coc-omni',
+      \ 'coc-syntax',
+      \ 'coc-yaml',
+      \ 'coc-solargraph',
+      \ 'coc-phpls',
+      \ 'coc-html',
+      \ 'coc-tailwindcss',
+      \ 'coc-markdownlint',
+      \ 'coc-git'
+      \]
+
+" Snippets
+Plug 'SirVer/ultisnips'
+" End HolaMundo
+
 " Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
 Plug 'tweekmonster/gofmt.vim'
@@ -65,6 +150,7 @@ Plug 'chriskempson/base16-vim'
 
 call plug#end()
 
+let g:NERDTreeIgnore = ['^node_modules$']
 
 let g:gruvbox_contrast_dark = 'hard'
 if exists('+termguicolors')
@@ -194,7 +280,14 @@ augroup END
 
 augroup THE_PRIMEAGEN
     autocmd!
-    " autocmd BufWritePre * :call TrimWhitespace()
+    autocmd BufWritePre * :call TrimWhitespace()
     " autocmd BufEnter * lua require'completion'.on_attach()
     " autocmd VimEnter * :VimApm
 augroup END
+
+" Comandos Flutter
+nnoremap <leader>fs :FlutterRun<cr>
+nnoremap <leader>fe :FlutterQuit<cr>
+nnoremap <leader>fr :FlutterHotReload<cr>
+nnoremap <leader>ft :FlutterHotRestart<cr>
+nnoremap <leader>fd :FlutterVisualDebug<cr>
