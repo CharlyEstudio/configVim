@@ -96,6 +96,20 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-ragtag'
 
+" Javascript / React
+Plug 'pangloss/vim-javascript'
+Plug 'elzr/vim-json'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'jxnblk/vim-mdx-js'
+
+" html / csss
+Plug 'mattn/emmet-vim'
+Plug 'ap/vim-css-color'
+Plug 'prettier/vim-prettier', {
+      \ 'do': 'yarn install',
+      \ 'branch': 'release/0.x'
+      \}
+
 " Autocompletation CoC
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " CoC recommended config
