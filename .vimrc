@@ -141,7 +141,7 @@ colorscheme gruvbox
 
 " Config AirLine => Footer
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'jsformatter'
+" let g:airline#extensions#tabline#formatter = 'jsformatter'
 
 " Config Key
 let mapleader=" "
@@ -168,9 +168,9 @@ let g:NERDTreeIgnore = ['^node_modules$']
 
 " sync open file with NERDTree
 " Check if NERDTree is open or active
-function! IsNERDTreeOpen()        
- return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
-endfunction
+"function! IsNERDTreeOpen()        
+" return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+"endfunction
 
 " Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
 " file, and we're not in vimdiff
@@ -233,21 +233,3 @@ au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
-
-" Using CocList
-" Show all diagnostics
-" nnoremap <leader>all  :<C-u>CocList diagnostics<cr>
-" Manage extensions
-" nnoremap <silent> <space>ext  :<C-u>CocList extensions<cr>
-" Show commands
-" nnoremap <silent> <space>com  :<C-u>CocList commands<cr>
-" Find symbol of current document
-" nnoremap <silent> <space>osy  :<C-u>CocList outline<cr>
-" Search workspace symbols
-" nnoremap <silent> <space>sym  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-" nnoremap <silent> <space>jact  :<C-u>CocNext<CR>
-" Do default action for previous item.
-" nnoremap <silent> <space>kactp  :<C-u>CocPrev<CR>
-" Resume latest coc list
-" nnoremap <silent> <space>plat  :<C-u>CocListResume<CR>
