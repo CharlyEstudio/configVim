@@ -10,20 +10,33 @@ set encoding=utf-8
 set showmatch
 set sw=2
 set relativenumber
-
 set smarttab
 set cindent
-set tabstop=2
-set shiftwidth=2
-
-" always uses spaces instead of tab characters
+set tabstop=4
+set shiftwidth=4
 set expandtab
-
 set laststatus=2
 set noshowmode
 
-call plug#begin('~/.vim/plugged')
+" Others
+set nohlsearch
+set hidden
+set softtabstop=4
+set smartindent
+set nu
+set nowrap
+set smartcase
+set noswapfile
+set nobackup
+set undodir=~/.vim/undodir
+set undofile
+set incsearch
+set termguicolors
+set scrolloff=8
+set completeopt=menuone,noinsert,noselect
+set cmdheight=2
 
+call plug#begin('~/.vim/plugged')
 " AirLine => Footer
 Plug 'vim-airline/vim-airline'
 
@@ -135,7 +148,41 @@ let g:coc_global_extensions = [
       \ 'coc-git'
       \]
 
+" Autocompletion Lua
+Plug 'nvim-lua/completion-nvim'
+
+Plug 'tweekmonster/gofmt.vim'
+
+" Archivos GIT
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
 call plug#end()
+
+let g:gruvbox_contrast_dark = 'hard'
+if exists('+termguicolors')
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
+let g:gruvbox_invert_selection='0'
+
+" --- vim go (polyglot) settings.
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_types = 1
+let g:go_highlight_function_parameters = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_generate_tags = 1
+let g:go_highlight_format_strings = 1
+let g:go_highlight_variable_declarations = 1
+let g:go_auto_sameids = 1
+
+let g:vim_be_good_log_file = 1
 
 colorscheme gruvbox
 
@@ -197,6 +244,9 @@ autocmd BufWritePre, TextChanged, InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,
 " always show signcolumns
 set signcolumn=yes
 
+" Ver archivos agregados en GIT
+nnoremap <C-p> :GFiles<CR>
+
 map <C-z> <Plug>(easymotion-s2)
 " nmap <Leader>z <Plug>(easymotion-s2)
 
@@ -233,3 +283,6 @@ au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
+
+" Ejecutar en NodeJS
+nmap <C-x> :!node %<CR>
