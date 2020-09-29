@@ -14,6 +14,17 @@ set sw=2
 set relativenumber
 set laststatus=2
 set noshowmode
+set smarttab
+set cindent
+set laststatus=2
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set smartindent
+set smartcase
+set nobackup
+set undodir=~/.vim/undodir
+set undofile
 
 call plug#begin('~/.vim/plugged')
 Plug 'morhetz/gruvbox'
@@ -26,7 +37,38 @@ Plug 'vim-airline/vim-airline'
 Plug 'sheerun/vim-polyglot'
 Plug 'stsewd/fzf-checkout.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'dart-lang/dart-vim-plugin'
+Plug 'thosakwe/vim-flutter'
+Plug 'Yggdroot/indentLine'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-ragtag'
+Plug 'SirVer/ultisnips'
 call plug#end()
+
+let g:indentLine_color_term=239
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['black',       'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
+let g:rbpt_max = 16
+let g:rbpt_loadcmd_toggle = 0
 
 colorscheme gruvbox
 let g:gruvbox_contrats_dark="hard"
@@ -133,3 +175,10 @@ let g:coc_global_extensions=[
       \ 'coc-xml',
       \ 'coc-yaml',
       \]
+
+" Comandos Flutter
+nnoremap <Leader>fs :FlutterRun<CR>
+nnoremap <Leader>fe :FlutterQuit<CR>
+nnoremap <Leader>fr :FlutterHotRelead<CR>
+nnoremap <Leader>ft :FlutterHotRestart<CR>
+nnoremap <Leader>fd :FlutterVisualDebug<CR>
